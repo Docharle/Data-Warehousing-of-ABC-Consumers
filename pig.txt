@@ -1,0 +1,33 @@
+su maria_dev
+
+cd
+
+vi DateDim
+
+date_dim = LOAD '/user/maria_dev/DateDim.csv' USING PigStorage(',');
+DESCRIBE date_dim;
+
+pig -f DateDim
+
+truck_events = LOAD '/user/maria_dev/truck_event_text_partition.csv' USING PigStorage(',')
+AS (driverId:int, truckId:int, eventTime:chararray,
+eventType:chararray, longitude:double, latitude:double,
+eventKey:chararray, correlationId:long, driverName:chararray,
+routeId:long,routeName:chararray,eventDate:chararray);
+DESCRIBE truck_events;
+
+AS (DateKey:int, FullDate:chararray, DayOfWeek:int,
+DaysName:chararray, DayOfYear:int, WeekNumber:int,
+MonthsName:chararray, MonthsNumber:int, Quarters:int,
+Years:int);
+
+ReceivedOrders = LOAD '/user/maria_dev/ReceivedPurOrderFact.csv' USING PigStorage(',')
+AS (DateKey:int, ProductKey:int, SupplierKey:int,
+LocationKey:int, QuantityOrdered:int, QuantityReceived:int);
+
+------------------------------------------------------------------------------------------
+date_dim = LOAD '/user/maria_dev/DateDim.csv' USING PigStorage(',')
+AS (DateKey:int, FullDate:chararray, DayOfWeek:int,
+DaysName:chararray, DayOfYear:int, WeekNumber:int,
+MonthsName:chararray, MonthsNumber:int, Quarters:int,
+Years:int);

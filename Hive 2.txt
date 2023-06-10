@@ -1,0 +1,97 @@
+insert overwrite table datedim
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) datekey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) fulldate,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) dayofweek,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) daysname,
+  regexp_extract(col_value, '^(?:([^,]*),?){5}', 1) dayofyear,
+  regexp_extract(col_value, '^(?:([^,]*),?){6}', 1) weeknumber,
+  regexp_extract(col_value, '^(?:([^,]*),?){7}', 1) monthsname,
+  regexp_extract(col_value, '^(?:([^,]*),?){8}', 1) monthsnumber,
+  regexp_extract(col_value, '^(?:([^,]*),?){9}', 1) quarters,
+  regexp_extract(col_value, '^(?:([^,]*),?){10}', 1) years
+
+from temps_datedim
+
+----------------------------------------------------------------------------------
+insert overwrite table productdim
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) productkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) sku,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) productname,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) descriptions,
+  regexp_extract(col_value, '^(?:([^,]*),?){5}', 1) condition,
+  regexp_extract(col_value, '^(?:([^,]*),?){6}', 1) producttype,
+  regexp_extract(col_value, '^(?:([^,]*),?){7}', 1) brand,
+  regexp_extract(col_value, '^(?:([^,]*),?){8}', 1) tags,
+  regexp_extract(col_value, '^(?:([^,]*),?){9}', 1) costprice,
+  regexp_extract(col_value, '^(?:([^,]*),?){10}', 1) retailprice,
+  regexp_extract(col_value, '^(?:([^,]*),?){11}', 1) datecreatedat,
+  regexp_extract(col_value, '^(?:([^,]*),?){12}', 1) datediscontinuedat,
+  regexp_extract(col_value, '^(?:([^,]*),?){13}', 1) isactive
+
+from temps_productdim
+
+-----------------------------------------------------------------------------------
+insert overwrite table locationdim
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) locationkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) destinationoutlet,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) region,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) city,
+  regexp_extract(col_value, '^(?:([^,]*),?){5}', 1) postalcode,
+  regexp_extract(col_value, '^(?:([^,]*),?){6}', 1) countryid
+
+from temps_locationdim
+
+----------------------------------------------------------------------------------
+
+insert overwrite table receivedpurorderfact
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) datekey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) productkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) supplierkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) locationkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){5}', 1) quantityordered,
+  regexp_extract(col_value, '^(?:([^,]*),?){6}', 1) quantityreceived
+
+from temps_receivedpurorderfact
+
+----------------------------------------------------------------------------------
+insert overwrite table sentpurorderfact
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) datekey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) productkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) supplierkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) locationkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){5}', 1) quantityordered,
+
+from temps_sentpurorderfact
+
+
+----------------------------------------------------------------------------------
+insert overwrite table stocklevelfact
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) datekey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) productkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) supplierkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) currentstocklevel
+  
+from temps_stocklevelfact
+
+
+---------------------------------------------------------------------------------
+insert overwrite table supplierdim
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) supplierkey,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) suppliername,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) phone,
+  regexp_extract(col_value, '^(?:([^,]*),?){4}', 1) email,
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) fax,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) firstlineaddress,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) postcode,
+  regexp_extract(col_value, '^(?:([^,]*),?){1}', 1) city,
+  regexp_extract(col_value, '^(?:([^,]*),?){2}', 1) state,
+  regexp_extract(col_value, '^(?:([^,]*),?){3}', 1) countryid
+  
+from temps_supplierdim

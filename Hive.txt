@@ -1,0 +1,75 @@
+CREATE TABLE DateDim(
+  DateKey INT,
+  FullDate DATE,
+  DayOfWeek INT,
+  DaysName STRING,
+  DayOfYear INT,
+  WeekNumber INT,
+  MonthsName STRING,
+  MonthsNumber INT,
+  Quarters INT,
+  Years INT
+)
+
+CREATE TABLE LocationDim(
+  LocationKey INT,
+  DestinationOutlet STRING,
+  Region STRING,
+  City STRING,
+  PostalCode STRING,
+  CountryID STRING
+) STORED AS TEXTFILE
+
+CREATE TABLE ProductDim(
+  ProductKey INT,
+  SKU STRING,
+  ProductName STRING,
+  Descriptions STRING,
+  Condition STRING,
+  ProductType STRING,
+  Brand STRING,
+  Tags STRING,
+  CostPrice FLOAT,
+  RetailPrice FLOAT,
+  DateCreatedAt DATE,
+  DateDiscontinuedAt DATE,
+  IsActive INT
+)
+
+CREATE TABLE ReceivedPurOrderFact(
+  DateKey INT,
+  ProductKey INT,
+  SupplierKey INT,
+  LocationKey INT,
+  QuantityOrdered INT,
+  QuantityReceived INT
+)
+
+CREATE TABLE SentPurOrderFact(
+  DateKey INT,
+  ProductKey INT,
+  SupplierKey INT,
+  LocationKey INT,
+  QuantityOrdered INT
+)
+
+CREATE TABLE StockLevelFact(
+  DateKey INT,
+  ProductKey INT,
+  SupplierKey INT,
+  CurrentStockLevel INT
+)
+CREATE TABLE SupplierDim(
+  SupplierKey INT,
+  SupplierName STRING,
+  Phone STRING,
+  Email STRING,
+  Fax STRING,
+  FirstLineAddress STRING,
+  PostCode STRING,
+  City STRING,
+  State STRING,
+  CountryID STRING
+)
+
+LOAD DATA INPATH '/user/maria_dev/SupplierDim.csv' OVERWRITE INTO TABLE temps_supplierdim
