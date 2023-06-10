@@ -32,11 +32,7 @@ To set up the ABC Consumer Data Warehouse project, follow these steps:
 
 1. Install and configure Hadoop cluster.
 2. Install and configure Pig and Hive on the Hadoop cluster.
-3. Clone this repository to your local machine using the following command:
-
-   ```
-   git clone https://github.com/your-username/abc-consumer-data-warehouse.git
-   ```
+ 
 
 4. Configure the necessary connection settings for Pig and Hive, such as Hadoop cluster address, username, and password, in the script files.
 
