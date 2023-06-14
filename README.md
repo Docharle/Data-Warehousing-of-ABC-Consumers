@@ -24,7 +24,6 @@ The ABC Consumer Data Warehouse project utilizes the following technologies:
 - **Pig:** A high-level platform for analyzing large datasets in Hadoop using a scripting language called Pig Latin.
 - **Hive:** A data warehouse infrastructure built on top of Hadoop that provides a high-level language (HiveQL) for querying and managing data.
 - **SQL:** Structured Query Language for managing and manipulating relational databases.
-- **Git/GitHub:** Version control system and online hosting platform for collaborative development.
 
 ## Setup Instructions
 
